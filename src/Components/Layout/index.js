@@ -1,0 +1,7 @@
+export { default as LayoutById } from './LayoutById'
+export { default as MainLayout } from './MainLayout'
+export { default as LayoutRoute } from './LayoutRoute'
+export { default as LayoutSingle } from './LayoutSingle'
+export { default as LayoutRoutePrivate } from './LayoutRoutePrivate'
+export { default as LayoutSinglePrivate } from './LayoutSinglePrivate'
+export { default as LayoutRouteSearch } from './LayoutRouteSearch'
