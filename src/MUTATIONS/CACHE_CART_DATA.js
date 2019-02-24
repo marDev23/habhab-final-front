@@ -1,7 +1,6 @@
 import { USER_DATA } from '../QUERIES/ALL_QUERIES'
 
 export const CACHE_CART_DATA_PLUS = (cache, { data: { updateQuantity } }) => {
-  console.log(cache)
   const { id, product, quantity, ...other } = updateQuantity
   const updatedQuantityData = { id, quantity: quantity + 1, product, ...other }
   const { me } = cache.readQuery({
@@ -30,7 +29,6 @@ export const CACHE_CART_DATA_PLUS = (cache, { data: { updateQuantity } }) => {
  }
 
  export const CACHE_CART_DATA_MINUS = (cache, { data: { updateQuantity } }) => {
-  console.log(cache)
   const { id, product, quantity, ...other } = updateQuantity
   const updatedQuantityData = { id, quantity: quantity - 1, product, ...other }
   const { me } = cache.readQuery({
@@ -59,7 +57,6 @@ export const CACHE_CART_DATA_PLUS = (cache, { data: { updateQuantity } }) => {
  }
 
 export const CACHE_CART_DATA_REMOVE = (cache, { data: { deleteToCart } }) => {
-  console.log(deleteToCart)
   const { me: { cart, ...otherInfo} } = cache.readQuery({
     query: USER_DATA
   })
@@ -73,5 +70,19 @@ export const CACHE_CART_DATA_REMOVE = (cache, { data: { deleteToCart } }) => {
       }
     }
   })
-
  }
+
+ // export const CACHE_USER_DATA = (cache, { data }, ...rest) => {
+ //  console.log(rest)
+ //  console.log(data)
+ //  console.log(cache)
+ //  const { me } = cache.readQuery({
+ //    query: USER_DATA
+ //  })
+ //  console.log(me)
+ //  cache.writeQuery({
+ //    query: USER_DATA,
+ //    data: {
+ //    }
+ //  })
+ // }

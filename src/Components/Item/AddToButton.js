@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { Button } from 'semantic-ui-react'
 import { Mutation, Query } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
-import { ADD_TO_CART, IS_SIGNED } from '../../QUERIES/ALL_QUERIES'
+import { ADD_TO_CART, USER_DATA, MY_CART, IS_SIGNED } from '../../QUERIES/ALL_QUERIES'
 
 
 const AddToButton = withRouter(({...props}) => {
@@ -12,11 +12,24 @@ const AddToButton = withRouter(({...props}) => {
     {({ loading, data: { isSignIn }, error }) => {
         if (loading) return ''
         return (
-            <Mutation mutation={ADD_TO_CART}>
+            <Mutation 
+                mutation={ADD_TO_CART}
+                refetchQueries={[
+                    {
+                        query: USER_DATA
+                    },
+                    {
+                        query: MY_CART
+                    },
+                    {
+                        query: IS_SIGNED
+                    }
+                ]}
+                awaitRefetchQueries={true}
+            >
             	{( addToCart, { loading, data, error }) => (
                 <Fragment>
                 { loading && '' }
-                { data && props.history.go(0) }
                 <Button
                 	color='orange'
                     inverted

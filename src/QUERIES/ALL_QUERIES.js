@@ -338,7 +338,11 @@ mutation addMoreInfo($address: ID!, $gender: String!, $birthday: Date!) {
     id
     gender
     address {
+      id
+      province
       municipal
+      baranggay
+      zip
     }
     birthday
   }

@@ -60,14 +60,12 @@ class ProfileFromAccount extends Component {
 			email, 
 			mobile, 
 			birthday: newBirthday, 
-			gender: newGender, 
-			address, 
-			addressId,
+			gender: newGender,  
+			addressId: newAddressId,
 			oldPassword,
 			newPassword,
 		} = this.state
-		console.log(newBirthday, newGender, addressId)
-		console.log(newGender)
+		console.log(newBirthday, newGender, newAddressId)
 		return (
 			<Segment style={{ padding: '3em 0em', minHeight: '100%' }} vertical>
 				<Grid container stackable centered columns={2}>
@@ -81,7 +79,7 @@ class ProfileFromAccount extends Component {
 					          <Header color='orange' as='h4'>Basic Info</Header>
 					          <Query query={ME_PRIMARY}>
 					          {({ loading, data: { me } }) => {
-					          	if (loading) return ''
+					          	if (loading) return <Loader active inline='centered' />
 					          	console.log(me)
 					          	return (
 					          		<Fragment>
@@ -164,129 +162,123 @@ class ProfileFromAccount extends Component {
 
 					        <Menu.Item>
 					          <Header color='orange' as='h4'>More Info</Header>
-					          <Query query={ME_MORE}>
-					          {({ loading, data: { meMore } }) => {
-					          if (loading) return ''
-					          	// console.log(data)
-					          return (
-					          	<Fragment>
-					          	{
-					          		meMore.gender === null || meMore.gender === undefined
-					          		?
-					          		<p>GENDER:&nbsp;&nbsp;</p>
-					          		:
-					          		<p>GENDER:&nbsp;&nbsp;{meMore.gender.toUpperCase()}</p>
-					          	}
-					          	{
-					          		meMore.gender === null || meMore.gender === undefined
-					          		?
-					          		<p>BIRTHDAY:&nbsp;&nbsp;</p>
-					          		:
-					          		<p>BIRTHDATE:&nbsp;&nbsp;{dayjs(meMore.birthday).format('MM-DD-YYYY')}</p>
-					          	}
+					          <Query query={ALL_ADDRESS}>
+								{({ loading : loadingAllAddress, data: { addresses } }) => (
+									<Fragment>
+								          <Query query={ME_MORE}>
+								          {({ loading: loadingMeMore, data: { meMore } }) => {
+								          if (loadingMeMore || loadingAllAddress) return <Loader active inline='centered' />
+								          const addressOptions= addresses.map(x => ({ key: x.id, value: x.id, text: x.municipal.toUpperCase()+'/'+x.baranggay.toUpperCase()
+									      	}))
+								      	return (
+								          	<Fragment>
+								          	{
+								          		meMore.gender === null || meMore.gender === undefined
+								          		?
+								          		<p>GENDER:&nbsp;&nbsp;</p>
+								          		:
+								          		<p>GENDER:&nbsp;&nbsp;{meMore.gender.toUpperCase()}</p>
+								          	}
+								          	{
+								          		meMore.gender === null || meMore.gender === undefined
+								          		?
+								          		<p>BIRTHDAY:&nbsp;&nbsp;</p>
+								          		:
+								          		<p>BIRTHDATE:&nbsp;&nbsp;{dayjs(meMore.birthday).format('MM-DD-YYYY')}</p>
+								          	}
 
-					          	{
-						          	meMore.address === null || meMore.address === undefined
-						          	?
-						          	<p>ADDRESS:&nbsp;&nbsp;</p>
-						          	:
-						          	<p>
-						          	ADDRESS:&nbsp;&nbsp;
-						          	{meMore.address.province.toUpperCase()},&nbsp;&nbsp;
-						          	{meMore.address.municipal.toUpperCase()},&nbsp;&nbsp;
-						          	{meMore.address.baranggay.toUpperCase()}&nbsp;&nbsp;
-						          	Philippines &nbsp;&nbsp;{meMore.address.zip}
-						          	</p>
-					          	}
-					          	<Button
-							      	fluid
-							      	size='tiny'
-							      	color='orange'
-							      	onClick={this.showMoreInfo}
-							    >Update New</Button>
-							    <Modal size='tiny' open={openModalMore} onClose={this.closeMoreInfo} closeIcon>
-							          <Modal.Header>Update New Info</Modal.Header>
-							          <Modal.Content>
-							          <Mutation mutation={UPDATE_MOREINFO}>
-							          {( addMoreInfo, { loading, data, error }) => (
-							          	<Fragment>
-							          	{ data && history.go(0) }
-							          	{error && 
-							          	<Message
-							          		negative
-							          		size='small'
-							          	>
-										    <Message.Header>Error!</Message.Header>
-										    <p>Error Updaing New Info!</p>
-										</Message>}
-							            <Form onSubmit={evt => {
-							            	evt.preventDefault();
-							            	addMoreInfo({
-							            		variables: {
-							            			gender: newGender,
-							            			birthday: newBirthday,
-							            			address: addressId
-							            		}
-							            	})
-							            }}>
-										    <Form.Field>
-										      <label>Gender</label>
-										      	<Dropdown 
-										      		placeholder='Gender' 
-										      		search
-										      		name='gender'
-										      		value={newGender === '' || meMore.gender === undefined ? 'Male' : newGender}
-										      		selection 
-										      		options={genderOptions}
-										      		onChange={this.changeGenderInfo} 
-										      		/>
-										    </Form.Field>
-										    <Form.Field>
-										      <label>Birthdate</label>
-										      <DateInput
-										          name="date"
-										          dateFormat="MM-DD-YYYY"
-										          placeholder="Date"
-										          value={newBirthday}
-										          iconPosition="left"
-										          onChange={this.changeDateInfo}
-										        />
-										    </Form.Field>
-										    <Form.Field>
-										      <label>Address</label>
-										      <Query query={ALL_ADDRESS}>
-										      {({ loading, data }) => {
-										      	if (loading) return ''
-										      	console.log(data)
-										      	const addressOptions= data.addresses.map(x => ({
-										      		key: x.id, value: x.id, text: x.municipal.toUpperCase()+'/'+x.baranggay.toUpperCase()
-										      	}))
-										      	console.log(addressOptions)
-										      	return (
-										      <Dropdown 
-										      		placeholder='Address' 
-										      		search
-										      		name={address}
-										      		value={addressId}
-										      		selection 
-										      		options={addressOptions}
-										      		onChange={this.changeAddressInfo} 
-										      		/>
-										      	)
-										      	}}
-										      	</Query>
-										    </Form.Field>
-										    <Button color='orange' size='small' fluid type='submit'>Submit</Button>
-										  </Form>
-										  </Fragment>
-										  )}
-										</Mutation>
-							          </Modal.Content>
-							        </Modal>
-					          </Fragment>
-					          )
-					      	  }}
-					          </Query>
+								          	{
+									          	meMore.address === null || meMore.address === undefined
+									          	?
+									          	<p>ADDRESS:&nbsp;&nbsp;</p>
+									          	:
+									          	<p>
+									          	ADDRESS:&nbsp;&nbsp;
+									          	{meMore.address.province.toUpperCase()},&nbsp;&nbsp;
+									          	{meMore.address.municipal.toUpperCase()},&nbsp;&nbsp;
+									          	{meMore.address.baranggay.toUpperCase()}&nbsp;&nbsp;
+									          	Philippines &nbsp;&nbsp;{meMore.address.zip}
+									          	</p>
+								          	}
+								          	<Button
+										      	fluid
+										      	size='tiny'
+										      	color='orange'
+										      	onClick={this.showMoreInfo}
+										    >Update New</Button>
+										    <Modal size='tiny' open={openModalMore} onClose={this.closeMoreInfo} closeIcon>
+										          <Modal.Header>Update New Info</Modal.Header>
+										          <Modal.Content>
+										          <Mutation mutation={UPDATE_MOREINFO}>
+										          {( addMoreInfo, { loading, data, error }) => (
+										          	<Fragment>
+										          	{loading && <Loader active inline='centered' />}
+										          	{ error && 
+									                    <Message
+									                    size='mini'
+									                    error
+									                    header='Error Updating New!'
+									                    list={error.graphQLErrors.map(x => x.message)}
+									                  /> }
+													{ data && history.go(0) }
+										            <Form onSubmit={evt => {
+										            	evt.preventDefault();
+										            	addMoreInfo({
+										            		variables: {
+										            			gender: newGender,
+										            			birthday: newBirthday,
+										            			address: newAddressId
+										            		}
+										            	})
+										            }}>
+													    <Form.Field>
+													      <label>Gender</label>
+													      	<Dropdown 
+													      		placeholder='Gender' 
+													      		search
+													      		name='gender'
+													      		value={newGender === '' || meMore.gender === undefined ? 'Male' : newGender}
+													      		selection 
+													      		options={genderOptions}
+													      		onChange={this.changeGenderInfo} 
+													      		/>
+													    </Form.Field>
+													    <Form.Field>
+													      <label>Birthdate</label>
+													      <DateInput
+													          name="date"
+													          dateFormat="MM-DD-YYYY"
+													          placeholder="Date"
+													          value={newBirthday}
+													          iconPosition="left"
+													          onChange={this.changeDateInfo}
+													        />
+													    </Form.Field>
+													    <Form.Field>
+													      <label>Address</label>
+													      <Dropdown 
+													      		placeholder='Address' 
+													      		search
+													      		name='address'
+													      		value={newAddressId}
+													      		selection 
+													      		options={addressOptions}
+													      		onChange={this.changeAddressInfo} 
+													      		/>
+													    </Form.Field>
+													    <Button color='orange' size='small' fluid type='submit'>Submit</Button>
+													  </Form>
+													  </Fragment>
+													  )}
+													</Mutation>
+										          </Modal.Content>
+										        </Modal>
+								          	</Fragment>
+								        )}}
+								        </Query>
+								    </Fragment>
+						        )}
+								</Query>
 					        </Menu.Item>
 					        <Menu.Item>
 					          <Header color='orange' as='h4'>Password</Header>

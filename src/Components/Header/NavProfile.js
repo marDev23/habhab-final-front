@@ -1,8 +1,13 @@
 import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Popup, Grid, Menu, Icon, Button, Label } from 'semantic-ui-react'
+import { Mutation } from 'react-apollo'
+import { SIGN_OUT } from '../../QUERIES/ALL_QUERIES'
+// import { CACHE_USER_DATA } from '../../MUTATIONS/CACHE_CART_DATA'
 
-const NavProfile = ({...props}) => (
+const NavProfile = withRouter(({history, ...props}) => {
+  // console.log(location)
+  return (
   <Popup
     trigger={<Icon circular color='orange' size='large' name='user circle' />}
     flowing
@@ -37,13 +42,30 @@ const NavProfile = ({...props}) => (
             Tray
           </Menu.Item>
           <Menu.Item as={Link} to='/profile'>Profile</Menu.Item>
-          <Menu.Item as='a'>Log Out</Menu.Item>
+          <Mutation 
+            mutation={SIGN_OUT}
+          >
+          {( signOut, { loading, data, error }) => (
+            <Fragment>
+              { loading && '' }
+              { data && history.go(0) }
+              <Menu.Item
+                as='a'
+                onClick={evt => {
+                  evt.preventDefault();
+                  signOut()
+                }}>
+                  Log Out
+              </Menu.Item>
+            </Fragment>
+          )}
+          </Mutation>
           </Fragment>
         }
         </Menu>
       </Grid.Column>
     </Grid>
   </Popup>
-)
+)})
 
 export default NavProfile

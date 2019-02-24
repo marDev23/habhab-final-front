@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 import { SIGN_OUT } from '../../QUERIES/ALL_QUERIES'
 
-const AccountMenu = withRouter(({ activeItem, history}) => {
-console.log(activeItem)
+const AccountMenu = withRouter(({ activeItem, history, match}) => {
+console.log(match)
 return (
 	<Menu pointing color='orange' secondary vertical fluid>
 		<Menu.Item
@@ -32,11 +32,15 @@ return (
 				Messages
 		</Menu.Item>
 		 
-		<Mutation mutation={SIGN_OUT}>
+		<Mutation 
+			mutation={SIGN_OUT}
+		>
 		{( signOut, { loading, data, error }) => (
 			<Fragment>
+			{ loading &&  '' }
+			{ data && history.go(0) }
 				<Menu.Item
-				  active={activeItem === '/settings'}
+				  as='a'
 				  onClick={evt => {
 				  	evt.preventDefault();
 				  	signOut()

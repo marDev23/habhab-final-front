@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { 
 	MainLayout, 
 	LayoutById, 
@@ -38,6 +38,9 @@ class App extends Component {
 					<Route exact path='/log_in' component={LogIn} />
 					<Route exact path='/sign_up' component={SignUp} />
 					<Route exact path='/thank_you' component={ThankYou} />
+					<Route exact path='/home_redirect' render={(props) => (
+			        	<Redirect props={props} to='/' />
+			        )} />
 			        <LayoutRoute exact path='/' layout={MainLayout} component={Main} />
 			        <LayoutRouteSearch exact path='/search' layout={MainLayout} component={SearchPage} />
 			        <LayoutRoutePrivate exact path='/tray' layout={MainLayout} component={MainTray} />
@@ -48,6 +51,7 @@ class App extends Component {
 			        <LayoutSingle exact path='/:id' layout={MainLayout} component={SingleProduct} />
 			        <LayoutById path='/orders/:id' layout={MainLayout} component={OrdersPageSingle} />
 			        <LayoutById path='/messages/:id' layout={MainLayout} component={MessagePageSingle} />
+			        
 			        <LayoutById path='/categories/:id' layout={MainLayout} component={Category} />
 			    </Switch>
 		    </Fragment>

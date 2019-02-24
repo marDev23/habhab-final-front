@@ -19,8 +19,9 @@ ResponsiveContainer.propTypes = {
 
 const MainLayout = (props) => (
   <Query query={USER_DATA}>
-  	{({ data, loading }) => {
+  	{({ loading, error, data }) => {
 	  	if (loading) return <Spinner />
+	  	console.log(data)
 		return  (
 			<ResponsiveContainer userData={data}>
 			  {props.children}
