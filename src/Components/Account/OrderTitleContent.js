@@ -34,7 +34,6 @@ class OrderTitleContent extends Component {
 		      <Label horizontal>{orderTypeObj.orderType.type.toUpperCase()}</Label>
 		    </List.Item><br />
 			<Label color='blue' as={Link} to={match.url + '/' + orderTypeObj.id} horizontal>View&nbsp;&nbsp;</Label>
-			<Label color='red' horizontal>Delete</Label>
 		</Accordion.Content>
 		</Fragment>
 		)

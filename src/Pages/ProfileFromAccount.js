@@ -166,38 +166,38 @@ class ProfileFromAccount extends Component {
 								{({ loading : loadingAllAddress, data: { addresses } }) => (
 									<Fragment>
 								          <Query query={ME_MORE}>
-								          {({ loading: loadingMeMore, data: { meMore } }) => {
+								          {({ loading: loadingMeMore, data }) => {
 								          if (loadingMeMore || loadingAllAddress) return <Loader active inline='centered' />
 								          const addressOptions= addresses.map(x => ({ key: x.id, value: x.id, text: x.municipal.toUpperCase()+'/'+x.baranggay.toUpperCase()
 									      	}))
 								      	return (
 								          	<Fragment>
 								          	{
-								          		meMore.gender === null || meMore.gender === undefined
+								          		data.meMore.gender === null || data.meMore.gender === undefined
 								          		?
 								          		<p>GENDER:&nbsp;&nbsp;</p>
 								          		:
-								          		<p>GENDER:&nbsp;&nbsp;{meMore.gender.toUpperCase()}</p>
+								          		<p>GENDER:&nbsp;&nbsp;{data.meMore.gender.toUpperCase()}</p>
 								          	}
 								          	{
-								          		meMore.gender === null || meMore.gender === undefined
+								          		data.meMore.gender === null || data.meMore.gender === undefined
 								          		?
 								          		<p>BIRTHDAY:&nbsp;&nbsp;</p>
 								          		:
-								          		<p>BIRTHDATE:&nbsp;&nbsp;{dayjs(meMore.birthday).format('MM-DD-YYYY')}</p>
+								          		<p>BIRTHDATE:&nbsp;&nbsp;{dayjs(data.meMore.birthday).format('MM-DD-YYYY')}</p>
 								          	}
 
 								          	{
-									          	meMore.address === null || meMore.address === undefined
+									          	data.meMore.address === null || data.meMore.address === undefined
 									          	?
 									          	<p>ADDRESS:&nbsp;&nbsp;</p>
 									          	:
 									          	<p>
 									          	ADDRESS:&nbsp;&nbsp;
-									          	{meMore.address.province.toUpperCase()},&nbsp;&nbsp;
-									          	{meMore.address.municipal.toUpperCase()},&nbsp;&nbsp;
-									          	{meMore.address.baranggay.toUpperCase()}&nbsp;&nbsp;
-									          	Philippines &nbsp;&nbsp;{meMore.address.zip}
+									          	{data.meMore.address.province.toUpperCase()},&nbsp;&nbsp;
+									          	{data.meMore.address.municipal.toUpperCase()},&nbsp;&nbsp;
+									          	{data.meMore.address.baranggay.toUpperCase()}&nbsp;&nbsp;
+									          	Philippines &nbsp;&nbsp;{data.meMore.address.zip}
 									          	</p>
 								          	}
 								          	<Button
@@ -237,7 +237,7 @@ class ProfileFromAccount extends Component {
 													      		placeholder='Gender' 
 													      		search
 													      		name='gender'
-													      		value={newGender === '' || meMore.gender === undefined ? 'Male' : newGender}
+													      		value={newGender === '' || data.meMore.gender === undefined ? 'Male' : newGender}
 													      		selection 
 													      		options={genderOptions}
 													      		onChange={this.changeGenderInfo} 
