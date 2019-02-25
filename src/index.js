@@ -10,7 +10,7 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 
 const link = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'http://habhab.biz:4000/graphql',
   credentials: 'include'
 })
 
