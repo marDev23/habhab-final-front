@@ -168,19 +168,20 @@ class ProfileFromAccount extends Component {
 								          <Query query={ME_MORE}>
 								          {({ loading: loadingMeMore, data }) => {
 								          if (loadingMeMore || loadingAllAddress) return <Loader active inline='centered' />
+								          console.log(data)
 								          const addressOptions= addresses.map(x => ({ key: x.id, value: x.id, text: x.municipal.toUpperCase()+'/'+x.baranggay.toUpperCase()
 									      	}))
 								      	return (
 								          	<Fragment>
 								          	{
-								          		data === null || data === undefined
+								          		data.meMore.gender === null || data.meMore.gender === undefined
 								          		?
 								          		<p>GENDER:&nbsp;&nbsp;</p>
 								          		:
 								          		<p>GENDER:&nbsp;&nbsp;{data.meMore.gender.toUpperCase()}</p>
 								          	}
 								          	{
-								          		data === null || data === undefined
+								          		data.meMore.birthday === null || data.meMore.birthday === undefined
 								          		?
 								          		<p>BIRTHDAY:&nbsp;&nbsp;</p>
 								          		:
@@ -188,7 +189,7 @@ class ProfileFromAccount extends Component {
 								          	}
 
 								          	{
-									          	data === null || data === undefined
+									          	data.meMore.address === null || data.meMore.address === undefined
 									          	?
 									          	<p>ADDRESS:&nbsp;&nbsp;</p>
 									          	:
