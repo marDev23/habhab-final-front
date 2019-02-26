@@ -59,11 +59,11 @@ class MobileContainer extends Component {
                   <Menu.Item onClick={this.handleSearchBarToggle}>
                     <Icon name='search' />
                   </Menu.Item>
-                  <Menu.Item as='a'>
+                  <Menu.Item as={Link} to='/tray'>
                     <Icon name='utensils' />
                     <Label circular size='mini' empty color='red' attached='top left' />
                   </Menu.Item>
-                  <Menu.Item as='a'>
+                  <Menu.Item as={Link} to='/profile'>
                     <Icon name='user outline' />
                     <Label circular size='mini' empty color='red' attached='top left' />
                   </Menu.Item>

@@ -173,14 +173,14 @@ class ProfileFromAccount extends Component {
 								      	return (
 								          	<Fragment>
 								          	{
-								          		data.meMore.gender === null || data.meMore.gender === undefined
+								          		data === null || data === undefined
 								          		?
 								          		<p>GENDER:&nbsp;&nbsp;</p>
 								          		:
 								          		<p>GENDER:&nbsp;&nbsp;{data.meMore.gender.toUpperCase()}</p>
 								          	}
 								          	{
-								          		data.meMore.gender === null || data.meMore.gender === undefined
+								          		data === null || data === undefined
 								          		?
 								          		<p>BIRTHDAY:&nbsp;&nbsp;</p>
 								          		:
@@ -188,7 +188,7 @@ class ProfileFromAccount extends Component {
 								          	}
 
 								          	{
-									          	data.meMore.address === null || data.meMore.address === undefined
+									          	data === null || data === undefined
 									          	?
 									          	<p>ADDRESS:&nbsp;&nbsp;</p>
 									          	:
@@ -210,7 +210,7 @@ class ProfileFromAccount extends Component {
 										          <Modal.Header>Update New Info</Modal.Header>
 										          <Modal.Content>
 										          <Mutation mutation={UPDATE_MOREINFO}>
-										          {( addMoreInfo, { loading, data, error }) => (
+										          {( addMoreInfo, { loading, data: dataMutationMoreInfo, error }) => (
 										          	<Fragment>
 										          	{loading && <Loader active inline='centered' />}
 										          	{ error && 
@@ -220,7 +220,7 @@ class ProfileFromAccount extends Component {
 									                    header='Error Updating New!'
 									                    list={error.graphQLErrors.map(x => x.message)}
 									                  /> }
-													{ data && history.go(0) }
+													{ dataMutationMoreInfo && history.go(0) }
 										            <Form onSubmit={evt => {
 										            	evt.preventDefault();
 										            	addMoreInfo({
@@ -237,7 +237,7 @@ class ProfileFromAccount extends Component {
 													      		placeholder='Gender' 
 													      		search
 													      		name='gender'
-													      		value={newGender === '' || data.meMore.gender === undefined ? 'Male' : newGender}
+													      		value={newGender}
 													      		selection 
 													      		options={genderOptions}
 													      		onChange={this.changeGenderInfo} 

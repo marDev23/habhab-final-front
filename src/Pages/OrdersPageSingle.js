@@ -32,11 +32,11 @@ const OrdersPageSingle = ({match: { params: { id } }}) => {
 			<Grid.Column width={8}>
 			<Query
 				query={MY_ORDER}
-				variables={{ id }}
+				variables={{ id: id }}
 			>
 			{({ loading, data: { order } }) => {
-				if (loading) return ''
-				console.log(order)
+				if (loading) return <p>'Loading..'</p>
+				// console.log(order)
 				return (
 				<Menu vertical fluid>
 			        <Menu.Item>
@@ -105,5 +105,3 @@ const OrdersPageSingle = ({match: { params: { id } }}) => {
 }
 
 export default OrdersPageSingle
-
-

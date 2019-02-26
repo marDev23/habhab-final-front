@@ -8,7 +8,7 @@ const LayoutSinglePrivate = ({ component: Component, ...rest }) => (
 	<Query query={IS_SIGNED}>
 		{({ loading, data }) => {
 			if (loading) return <Loader active inline='centered' size='large' />
-			if (data.isSignIn === false) return <Redirect to={{ pathname: "/log_in", state: { from: rest.location } }} />
+			if (data === undefined || data.isSignIn === false) return <Redirect to={{ pathname: "/log_in", state: { from: rest.location } }} />
 			return <Route {...rest} render={props => ( <Component {...props} /> )} />
 		}}
 	</Query>

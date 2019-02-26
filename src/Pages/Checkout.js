@@ -9,14 +9,14 @@ const Checkout = () => (
 	<Container textAlign='center'>
     <Fragment>
 		 <Query query={MY_ADDRESS}>
-            {({ loading, data: { me } }) => {
+            {({ loading, data }) => {
             	if (loading) return ''
-            	console.log(me)
+
             	const emptyAddress = { municipal: '', baranggay: '', id: '', isPickUpAvailable: false, zip: '', fee: '', province: '' }
-        		if (me.address == null) {
+        		if (data === null || data === undefined) {
         			return <MainCheckout address={emptyAddress} />
         		}
-        		return <MainCheckout address={me.address} />
+        		return <MainCheckout address={data.me.address} />
         	}}
         </Query>
     </Fragment>

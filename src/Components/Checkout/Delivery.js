@@ -78,20 +78,20 @@ class Delivery extends Component{
                         <Header size='large' textAlign='center'>Options</Header>
                         <Menu.Item>
                               <Checkbox
-                                id='5c61b8d20070d71b911a103b'
-                                checked={delivery.deliveryOption === '5c61b8d20070d71b911a103b'}
+                                id='5c74847e7d34ca059bf53958'
+                                checked={delivery.deliveryOption === '5c74847e7d34ca059bf53958'}
                                 label='FOR DELIVERY'
                                 onClick={handleClickDelivery} />
                         </Menu.Item>
                         <Menu.Item>
                               <Checkbox
-                                id='5c61b8e20070d71b911a103c'
-                                checked={delivery.deliveryOption === '5c61b8e20070d71b911a103c'}
+                                id='5c74849d7d34ca059bf53959'
+                                checked={delivery.deliveryOption === '5c74849d7d34ca059bf53959'}
                                 label='FOR PICK-UP'
                                 onClick={handleClickDelivery}  />
                               <Divider />
                                 <DateTimeInput
-                                  disabled={delivery.deliveryOption === '5c61b8d20070d71b911a103b'}
+                                  disabled={delivery.deliveryOption === '5c74847e7d34ca059bf53958'}
                                   name="dateTime"
                                   placeholder="Date Time"
                                   dateFormat="MM-DD-YYYY"

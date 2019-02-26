@@ -98,7 +98,7 @@ class Confirmation extends Component{
                                             if (loadingACart) return ''
                                             if (loadingAShipment) return ''
                                             console.log(dayjs(Date.now()).format('MM-DD-YYYY,hh:mm A'))
-                                            if (orderType.type === 'for-delivery') {
+                                            if (orderType.type === 'for delivery') {
                                                 return (
                                                     <Fragment>
                                                     <Menu.Item>ORDER TYPE: {orderType.type.toUpperCase()}</Menu.Item>
@@ -147,12 +147,13 @@ class Confirmation extends Component{
                                     onClick={evt => {
                                         evt.preventDefault();
                                         const datePlaced = dayjs(Date.now()).format('MM-DD-YYYY,hh:mm A')
+                                        console.log(datePlaced)
                                         const input = cart.map(x => ({ id: x.id, productId: x.product.id, quantity: x.quantity, price: x.product.price }))
                                         placeOrder({
                                             variables: {
                                                 orderTypeId: delivery.deliveryOption,
                                                 datePlaced: datePlaced,
-                                                datePickUp: delivery.deliveryOption === '5c61b8d20070d71b911a103b' ? datePlaced : delivery.dateTime,
+                                                datePickUp: delivery.deliveryOption === '5c74847e7d34ca059bf53958' ? datePlaced : delivery.dateTime,
                                                 addressId: delivery.addressId,
                                                 input: input
                                             }
