@@ -98,7 +98,8 @@ class Confirmation extends Component{
                                             if (loadingACart) return ''
                                             if (loadingAShipment) return ''
                                             console.log(dayjs(Date.now()).format('MM-DD-YYYY,hh:mm A'))
-                                            if (orderType.type === 'for delivery') {
+                                            console.log(orderType)
+                                            if (orderType.type === 'for-delivery') {
                                                 return (
                                                     <Fragment>
                                                     <Menu.Item>ORDER TYPE: {orderType.type.toUpperCase()}</Menu.Item>

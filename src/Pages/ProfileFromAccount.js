@@ -66,6 +66,9 @@ class ProfileFromAccount extends Component {
 			newPassword,
 		} = this.state
 		console.log(newBirthday, newGender, newAddressId)
+		const isNull = newBirthday === '' || newGender === '' || newAddressId === ''
+		const isEmpty = newBirthday === null || newGender === null || newAddressId === null
+		const isUndefined = newGender === undefined || newBirthday === undefined || newAddressId === undefined 
 		return (
 			<Segment style={{ padding: '3em 0em', minHeight: '100%' }} vertical>
 				<Grid container stackable centered columns={2}>
@@ -174,14 +177,14 @@ class ProfileFromAccount extends Component {
 								      	return (
 								          	<Fragment>
 								          	{
-								          		data.meMore.gender === null || data.meMore.gender === undefined
+								          		data.meMore.gender === null || data.meMore.gender === undefined || data.meMore === undefined
 								          		?
 								          		<p>GENDER:&nbsp;&nbsp;</p>
 								          		:
 								          		<p>GENDER:&nbsp;&nbsp;{data.meMore.gender.toUpperCase()}</p>
 								          	}
 								          	{
-								          		data.meMore.birthday === null || data.meMore.birthday === undefined
+								          		data.meMore.birthday === null || data.meMore.birthday === undefined || data.meMore === undefined
 								          		?
 								          		<p>BIRTHDAY:&nbsp;&nbsp;</p>
 								          		:
@@ -189,7 +192,7 @@ class ProfileFromAccount extends Component {
 								          	}
 
 								          	{
-									          	data.meMore.address === null || data.meMore.address === undefined
+									          	data.meMore.address === null || data.meMore.address === undefined || data.meMore === undefined
 									          	?
 									          	<p>ADDRESS:&nbsp;&nbsp;</p>
 									          	:
@@ -267,7 +270,7 @@ class ProfileFromAccount extends Component {
 													      		onChange={this.changeAddressInfo} 
 													      		/>
 													    </Form.Field>
-													    <Button color='orange' size='small' fluid type='submit'>Submit</Button>
+													    <Button color='orange' size='small' fluid type='submit' disabled={isEmpty || isNull || isUndefined}>Submit</Button>
 													  </Form>
 													  </Fragment>
 													  )}

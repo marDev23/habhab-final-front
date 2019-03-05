@@ -16,6 +16,17 @@ class Delivery extends Component{
         this.props.prevStep()
     }
 
+    checkDeliveryIsTrue = (option) => {
+        if (option === '5c74847e7d34ca059bf53958') {
+            if (this.props.delivery.isPickUpAvailable === false) {
+                return true
+            } else {
+                return false
+            }
+        }
+        return false
+    }
+
     render(){
         const {
                 delivery,
@@ -46,6 +57,7 @@ class Delivery extends Component{
                                 text: y.baranggay.toUpperCase(),
                                 fee: y.fee,
                                 ispickupavailable: y.isPickUpAvailable }))
+                        console.log(addressBaranggay)
                         return (
                             <Fragment>
                             <Menu vertical fluid>
@@ -93,7 +105,7 @@ class Delivery extends Component{
                                 <DateTimeInput
                                   disabled={delivery.deliveryOption === '5c74847e7d34ca059bf53958'}
                                   name="dateTime"
-                                  placeholder="Date Time"
+                                  placeholder="MM-DD-YYYY,hh:mm AM/PM"
                                   dateFormat="MM-DD-YYYY"
                                   timeFormat="AMPM"
                                   divider=","
@@ -110,7 +122,7 @@ class Delivery extends Component{
                     <Button
                         fluid
                         color='orange'
-                        disabled={delivery.deliveryOption === null || delivery.deliveryOption === '' || delivery.addressId === null || delivery.addressId === ''}
+                        disabled={delivery.deliveryOption === null || delivery.deliveryOption === '' || delivery.addressId === null || delivery.addressId === '' || this.checkDeliveryIsTrue(delivery.deliveryOption)}
                         onClick={this.saveAndContinue}>
                         Proceed
                     </Button>

@@ -12,7 +12,7 @@ class MainCheckout extends Component {
           municipal: props.address.municipal,
           baranggay: props.address.baranggay,
           addressId: props.address.id,
-          isPickUpAvailable: false,
+          isPickUpAvailable: props.address.isPickUpAvailable,
           deliveryOption: '',
           dateTime: '',
         }
@@ -39,6 +39,7 @@ class MainCheckout extends Component {
     handleChangeBaranggay = (e, { value, options }) => {
         console.log(options)
         const filterFinal = options.find(x => x.value === value)
+        console.log(filterFinal)
         this.setState({ baranggay: value, addressId: filterFinal.key, isPickUpAvailable: filterFinal.ispickupavailable })
     }
 

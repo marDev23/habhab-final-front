@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react'
 import { Icon, Step, Grid, Header, Image, Container, Divider } from 'semantic-ui-react'
 import LogoCircle from '../../main_logo_mobile.png'
+import { Link } from 'react-router-dom'
 
 const Steps = ({ step, children }) => (
 <Fragment>
 	<Divider hidden />
 	<Container>
 		<Header as='h2' color='orange' textAlign='center'>
-	              <Image size='small' src={LogoCircle} /> Checkout
+	              <Image size='small' src={LogoCircle} as={Link} to='/' /> Checkout
 	            </Header>
 	</Container>
 	<Divider hidden />

@@ -138,7 +138,7 @@ class LogIn extends Component {
                   </Fragment>
               )}
             </Mutation>
-            <Container textAlign='right'><a href='/'>Forgot Password?</a></Container>
+            <Container textAlign='right'><a href='/forgot_password'>Forgot Password?</a></Container>
             
             <Message>
               New to us? <a href='/sign_up'>Sign Up</a>

@@ -8,6 +8,7 @@ import {
 	LayoutRoutePrivate, 
 	LayoutSinglePrivate,
 	LayoutRouteSearch,
+	LayoutRouteReset
 } from './Components/Layout'
 import {
 	Main, 
@@ -24,6 +25,12 @@ import {
 	OrdersPageSingle,
 	MessagePageSingle,
 	SearchPage,
+	TermsAndCondition,
+	PrivacyPolicy,
+	About,
+	SiteMap,
+	ResetPage,
+	ForgotPassword
 } from './Pages'
 
 // const Hey = ({match}) => (
@@ -38,11 +45,17 @@ class App extends Component {
 					<Route exact path='/log_in' component={LogIn} />
 					<Route exact path='/sign_up' component={SignUp} />
 					<Route exact path='/thank_you' component={ThankYou} />
+					<Route exact path='/terms_and_conditions' component={TermsAndCondition} />
+					<Route exact path='/privacy_policy' component={PrivacyPolicy} />
+					<Route exact path='/about_us' component={About} />
+					<Route exact path='/site_map' component={SiteMap} />
 					<Route exact path='/home_redirect' render={(props) => (
 			        	<Redirect props={props} to='/' />
 			        )} />
 			        <LayoutRoute exact path='/' layout={MainLayout} component={Main} />
 			        <LayoutRouteSearch exact path='/search' layout={MainLayout} component={SearchPage} />
+			        <LayoutRouteReset exact path='/verify' component={ResetPage} />
+			        <LayoutRouteReset exact path='/forgot_password' component={ForgotPassword} />
 			        <LayoutRoutePrivate exact path='/tray' layout={MainLayout} component={MainTray} />
 			        <LayoutRoutePrivate exact path='/orders' layout={MainLayout} component={OrdersFromAccount} />
 			        <LayoutRoutePrivate exact path='/messages' layout={MainLayout} component={MessageFromAccount} />

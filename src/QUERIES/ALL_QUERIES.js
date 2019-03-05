@@ -363,3 +363,13 @@ mutation {
   signOut
 }
 `
+export const FORGOT_PASSWORD = gql `
+mutation changeForgotten($email: String!){
+  changeForgotten(email: $email)
+}
+`
+export const VERIFY_PASSWORD = gql `
+mutation verifyForgotten($token: String!, $newPassword: String!){
+  verifyForgotten(token: $token, newPassword: $newPassword)
+}
+`
