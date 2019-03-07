@@ -30,7 +30,6 @@ class OrderTitleContent extends Component {
 		</Accordion.Title>
 		<Accordion.Content active={activeIndex === messageData.id}>
 			<Label color='blue' as={Link} to={match.url + '/' + messageData.id} horizontal>View&nbsp;&nbsp;</Label>
-			<Label color='red' horizontal>Delete</Label>
 		</Accordion.Content>
 		</Fragment>
 		)

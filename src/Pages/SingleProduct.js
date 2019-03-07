@@ -75,7 +75,7 @@ class SingleProduct extends Component {
 							<Grid.Row>
 						    <Grid.Column width={8}>
 						      <Segment>
-						        <Image centered size='medium' src={ProductLogo} />
+						        <Image centered size='medium' src={data.product.img} />
 						      </Segment>
 						    </Grid.Column>
 						    <Grid.Column width={6}>

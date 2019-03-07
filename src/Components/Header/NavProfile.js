@@ -38,7 +38,6 @@ const NavProfile = withRouter(({history, ...props}) => {
             Orders
           </Menu.Item>
           <Menu.Item as={Link} to='/tray'>
-            <Label circular color='red' empty />
             Tray
           </Menu.Item>
           <Menu.Item as={Link} to='/profile'>Profile</Menu.Item>

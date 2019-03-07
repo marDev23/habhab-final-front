@@ -69,6 +69,7 @@ query ProductByCategory($categoryId: ID!){
     id
     name
     price
+    img
     category{
       id
       category
@@ -86,8 +87,9 @@ export const PRODUCT_CATEGORIES = gql `
 `
 export const ALL_PRODUCTS_FEATURED = gql `
 {
-  products{
+  products{ 
     id
+    img
     category{
       id
       category
@@ -103,6 +105,7 @@ query Product($name: String!){
   product(name: $name) {
     id
     name
+    img
     description
     price
     category {
@@ -119,6 +122,7 @@ mutation addToCart($productId: ID, $quantity: Float) {
     quantity
     product {
       id
+      img
       price
       description
     }
@@ -132,6 +136,7 @@ export const MY_CART = gql `
     quantity
     product {
       id
+      img
       price
       name
       description
@@ -157,6 +162,7 @@ export const ALL_CART = gql `
   cart {
     id
     product {
+      img
       id
       name
       price
