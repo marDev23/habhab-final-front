@@ -17,7 +17,7 @@ class Review extends Component{
             <Fragment>
             <Query query={ALL_CART}>
                 {({ loading, data, error }) => {
-                    if (loading) return ''
+                    if (loading) return <p>Loading...</p>
                     console.log(data)
                     return (
                         <Fragment>

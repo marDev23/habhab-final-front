@@ -4,7 +4,6 @@ import { Query } from 'react-apollo'
 import { Container, Breadcrumb, Segment, Grid, Image, Header, Label, Input, Loader, Menu } from 'semantic-ui-react'
 import { AddToButton } from '../Components/Item'
 import { SINGLE_PRODUCT } from '../QUERIES/ALL_QUERIES'
-import ProductLogo from '../product.png'
 
 class SingleProduct extends Component {
 

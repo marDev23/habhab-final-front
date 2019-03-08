@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Grid, Image, Label, Divider } from 'semantic-ui-react'
-import ProductLogo from '../../product.png'
 
 const Item = ({...props}) =>{ 
 console.log(props)

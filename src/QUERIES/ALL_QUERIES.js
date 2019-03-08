@@ -122,7 +122,6 @@ mutation addToCart($productId: ID, $quantity: Float) {
     quantity
     product {
       id
-      img
       price
       description
     }
@@ -136,7 +135,6 @@ export const MY_CART = gql `
     quantity
     product {
       id
-      img
       price
       name
       description
@@ -162,7 +160,6 @@ export const ALL_CART = gql `
   cart {
     id
     product {
-      img
       id
       name
       price
@@ -377,5 +374,11 @@ mutation changeForgotten($email: String!){
 export const VERIFY_PASSWORD = gql `
 mutation verifyForgotten($token: String!, $newPassword: String!){
   verifyForgotten(token: $token, newPassword: $newPassword)
+}
+`
+
+export const CANCEL_ORDER = gql `
+mutation cancelOrder($order: ID!) {
+  cancelOrder(order: $order)
 }
 `

@@ -1,6 +1,8 @@
 import React, { Component ,Fragment } from 'react'
 import { Accordion, List, Icon, Label } from 'semantic-ui-react'
+import { Mutation } from 'react-apollo'
 import { Link } from 'react-router-dom'
+import { CANCEL_ORDER } from '../../QUERIES/ALL_QUERIES'
 
 class OrderTitleContent extends Component {
 
@@ -16,6 +18,7 @@ class OrderTitleContent extends Component {
 	render() {
 		const { orderTypeObj, match } = this.props
 		const { activeIndex } = this.state
+		console.log(orderTypeObj.id)
 		return (
 		<Fragment>
 		<Accordion.Title active={activeIndex === orderTypeObj.id} index={orderTypeObj.id} onClick={this.handleClick}>
@@ -34,6 +37,25 @@ class OrderTitleContent extends Component {
 		      <Label horizontal>{orderTypeObj.orderType.type.toUpperCase()}</Label>
 		    </List.Item><br />
 			<Label color='blue' as={Link} to={match.url + '/' + orderTypeObj.id} horizontal>View&nbsp;&nbsp;</Label>
+			<Mutation mutation={CANCEL_ORDER}>
+			{(cancelOrder, { loading, data, error }) => (
+			<Label 
+				as='a'
+				color='red'
+				horizontal
+				onClick={evt => {
+					evt.preventDefault();
+					console.log(orderTypeObj.id)
+					cancelOrder({
+						variables: {
+							order: orderTypeObj.id
+						}
+					})
+				}}
+			>Cancel&nbsp;&nbsp;
+			</Label>
+			)}
+			</Mutation>
 		</Accordion.Content>
 		</Fragment>
 		)
