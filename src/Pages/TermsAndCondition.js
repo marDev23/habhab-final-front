@@ -26,7 +26,7 @@ const TermsAndCondition = () => (
 			<Header size='small'>5. Banning.</Header>
 			<Header size='tiny'>User account will be banned for false information, not paying ordered items.</Header>
 			<Header size='small'>6. Delivery Policy.</Header>
-			<Header size='tiny'>An estimated delivery date and time will be provided after your order is placed.</Header>
+			<Header size='tiny'>An estimated delivery date and time will be provided after your order is placed. The total minimum not lesser than 100.</Header>
 		</Container>
 		<br />
 		<Footer />

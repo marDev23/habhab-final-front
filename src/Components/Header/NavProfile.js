@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { Popup, Grid, Menu, Icon, Button, Label } from 'semantic-ui-react'
+import { Popup, Grid, Menu, Icon, Button } from 'semantic-ui-react'
 import { Mutation } from 'react-apollo'
 import { SIGN_OUT } from '../../QUERIES/ALL_QUERIES'
 // import { CACHE_USER_DATA } from '../../MUTATIONS/CACHE_CART_DATA'
@@ -30,11 +30,9 @@ const NavProfile = withRouter(({history, ...props}) => {
           :
           <Fragment>
           <Menu.Item className='header' as={Link} to='/messages'>
-            <Label circular color='red' empty />
             Messages
           </Menu.Item>
           <Menu.Item as={Link} to='/orders'>
-            <Label circular color='red' empty />
             Orders
           </Menu.Item>
           <Menu.Item as={Link} to='/tray'>

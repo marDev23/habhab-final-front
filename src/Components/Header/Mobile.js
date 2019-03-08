@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Responsive, Sidebar, Menu, Container, Segment, Icon, Image, Label } from 'semantic-ui-react'
+import { Responsive, Sidebar, Menu, Container, Segment, Icon, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { SideBarComponent, HorizontalSearchBar } from './'
 import Logo from '../../main_logo_mobile.png'
@@ -61,11 +61,9 @@ class MobileContainer extends Component {
                   </Menu.Item>
                   <Menu.Item as={Link} to='/tray'>
                     <Icon name='utensils' />
-                    <Label circular size='mini' empty color='red' attached='top left' />
                   </Menu.Item>
                   <Menu.Item as={Link} to='/profile'>
                     <Icon name='user outline' />
-                    <Label circular size='mini' empty color='red' attached='top left' />
                   </Menu.Item>
                 </Menu.Menu>
               </Menu>
